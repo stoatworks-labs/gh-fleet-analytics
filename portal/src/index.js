@@ -17,7 +17,10 @@
 
 import PORTAL_HTML from "../page.html";
 
-const REALM = "Fleet analytics";
+/** Shown in the browser's own sign-in dialog, which is the only branding this page has
+ *  before you are through the door. Set PORTAL_REALM in wrangler.jsonc `vars` to change
+ *  it — it is not a secret. */
+const DEFAULT_REALM = "Fleet analytics";
 
 /** Constant-time-ish comparison. A plain === on a secret leaks its length and, in
  *  principle, its prefix through timing. A portal is a low-value target and Workers
@@ -32,11 +35,11 @@ function safeEqual(a, b) {
   return diff === 0;
 }
 
-function unauthorised() {
+function unauthorised(realm) {
   return new Response("Authentication required.", {
     status: 401,
     headers: {
-      "WWW-Authenticate": `Basic realm="${REALM}", charset="UTF-8"`,
+      "WWW-Authenticate": `Basic realm="${realm}", charset="UTF-8"`,
       "Content-Type": "text/plain; charset=utf-8",
     },
   });
@@ -44,6 +47,8 @@ function unauthorised() {
 
 export default {
   async fetch(request, env) {
+    const realm = env.PORTAL_REALM || DEFAULT_REALM;
+
     if (!env.PORTAL_PASSWORD) {
       // Fail closed, and say why. A portal that serves the whole fleet's numbers
       // because a secret was missing is the one failure mode worth being loud about.
@@ -54,17 +59,17 @@ export default {
     }
 
     const header = request.headers.get("Authorization") || "";
-    if (!header.startsWith("Basic ")) return unauthorised();
+    if (!header.startsWith("Basic ")) return unauthorised(realm);
 
     let decoded;
     try {
       decoded = atob(header.slice(6));
     } catch {
-      return unauthorised();
+      return unauthorised(realm);
     }
     // "user:password" — the username is ignored, only the password is checked.
     const password = decoded.slice(decoded.indexOf(":") + 1);
-    if (!safeEqual(password, env.PORTAL_PASSWORD)) return unauthorised();
+    if (!safeEqual(password, env.PORTAL_PASSWORD)) return unauthorised(realm);
 
     return new Response(PORTAL_HTML, {
       headers: {

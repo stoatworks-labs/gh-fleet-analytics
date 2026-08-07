@@ -22,6 +22,12 @@
     { "type": "Text", "globs": ["page.html"], "fallthrough": true }
   ],
 
+  // Shown in the browser's own sign-in dialog — the only branding the page has before
+  // you are through the door. Not a secret; delete it to get the default.
+  "vars": {
+    "PORTAL_REALM": "Fleet analytics"
+  },
+
   "observability": { "enabled": true }
 
   // Secret, set with `npx wrangler secret put PORTAL_PASSWORD`:
