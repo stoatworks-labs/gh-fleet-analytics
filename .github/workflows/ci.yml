@@ -28,6 +28,29 @@ jobs:
       - name: Byte-compile
         run: python3 -m compileall -q collect.py render.py examples/make-example-data.py
 
+      - name: The example workflow is valid YAML
+        # Users copy this file into their own repo verbatim. A syntax error in it would
+        # never fail anything here, and would surface as a broken workflow in a stranger's
+        # repository instead.
+        run: |
+          python3 -c "
+          import yaml, sys
+          d = yaml.safe_load(open('examples/collect.yml'))
+          steps = d['jobs']['collect']['steps']
+          assert steps, 'no steps'
+          print(f'examples/collect.yml: {len(steps)} steps, parsed clean')
+          "
+
+      - name: The example config parses and matches the data
+        run: |
+          python3 -c "
+          import json
+          cfg = json.load(open('examples/config.json'))
+          idx = json.load(open('examples/data/index.json'))
+          assert cfg['owner'] == idx['owner'], (cfg['owner'], idx['owner'])
+          print(f\"examples/config.json: owner {cfg['owner']}, {len(idx['repos'])} repos\")
+          "
+
       - name: Example data is deterministic
         # The generator is seeded and dated, so regenerating must produce no diff. A diff
         # here means the generator changed but the committed data did not, or vice versa.

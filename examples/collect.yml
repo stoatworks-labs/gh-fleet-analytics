@@ -41,6 +41,62 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Fail in two seconds rather than fifteen minutes.
+      #
+      # A token that cannot see private repositories does not error — it answers every
+      # request cheerfully, just about a smaller world — so the problem otherwise only
+      # surfaces at the very end, when the collector refuses to write a shrunken index.
+      # That is the right place to CATCH it, but a quarter-hour to learn you ticked the
+      # wrong box is a miserable loop, and it burns Actions minutes each time.
+      #
+      # Tests the capability, not the scope string: fine-grained tokens send no
+      # X-OAuth-Scopes header at all, so asking "does `repo` appear" would report a
+      # false failure for a perfectly good fine-grained token.
+      - name: Check the token
+        env:
+          TOKEN: ${{ secrets.ANALYTICS_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${TOKEN:-}" ]; then
+            echo "::error::ANALYTICS_TOKEN is not set on this repository."
+            exit 1
+          fi
+          if ! curl -sf -H "Authorization: Bearer $TOKEN" \
+                 -H "Accept: application/vnd.github+json" \
+                 https://api.github.com/user >/dev/null; then
+            echo "::error::ANALYTICS_TOKEN does not authenticate. It has probably expired —"
+            echo "::error::an expired token fails silently every night, and every silent"
+            echo "::error::night is a permanent hole in the data."
+            exit 1
+          fi
+
+          want_private=$(python3 -c \
+            "import json;print(json.load(open('config.json')).get('include_private', True))")
+          if [ "$want_private" != "True" ]; then
+            echo "include_private is false — not checking private visibility"
+            exit 0
+          fi
+
+          n=$(curl -sf -H "Authorization: Bearer $TOKEN" \
+                -H "Accept: application/vnd.github+json" \
+                "https://api.github.com/user/repos?affiliation=owner&visibility=private&per_page=1" \
+              | python3 -c "import json,sys; print(len(json.load(sys.stdin)))")
+          if [ "$n" -eq 0 ]; then
+            # A WARNING, not an error, because "the token cannot see private repos" and
+            # "you have no private repos" look identical from here. Once one collection
+            # has happened the distinction is decidable, and collect.py makes it: it
+            # refuses to write an index that lost the private half. If you know you have
+            # private repos, change this to an error and get the fast failure.
+            echo "::warning::The token sees no private repositories. If you have some, this"
+            echo "::warning::run will collect only the public half. Classic PAT: tick the"
+            echo "::warning::top-level 'repo' box, not 'public_repo' — they are nested in"
+            echo "::warning::GitHub's UI and easy to confuse. Editing a token's scopes keeps"
+            echo "::warning::the same value, so the secret itself needs no update."
+            echo "::warning::Fine-grained PAT: Administration + Metadata read, ALL repositories."
+          else
+            echo "token sees private repositories — ok"
+          fi
+
       - name: Collect
         env:
           # NOT secrets.GITHUB_TOKEN — that one is scoped to this repository alone and

@@ -148,6 +148,13 @@ Note it is **not** `secrets.GITHUB_TOKEN` — Actions' built-in token is scoped 
 repository and returns 404 for every other repo you own, which looks exactly like a
 deleted repo rather than a permissions problem.
 
+The workflow preflights the token in about two seconds before spending fifteen minutes
+collecting, because the failure it catches is silent: a token that cannot see private
+repos answers every request cheerfully, just about a smaller world. It warns rather than
+fails there, since "cannot see them" and "you have none" are indistinguishable on a first
+run — if you know you have private repos, make that step an error and get the fast
+failure.
+
 ### 6. Serve it, if you want it off your laptop
 
 ```bash
