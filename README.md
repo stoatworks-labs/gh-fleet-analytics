@@ -27,6 +27,11 @@ collect.py  ──►  data/           ──►  render.py  ──►  portal/p
 Everything is Python standard library and one small Cloudflare Worker. No database, no
 dependencies to install, no service to sign up for.
 
+![The portal, rendered from the bundled synthetic dataset](docs/screenshots/portal.png)
+
+*The portal, rendered from the synthetic dataset that ships with the repo — run
+`python3 render.py --config examples/config.json` to produce exactly this.*
+
 ---
 
 ## What you get
