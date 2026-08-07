@@ -195,6 +195,14 @@ A Cloudflare cron Worker was the obvious alternative and does not work: the
 
 - **A read-only token 403s on every traffic endpoint.** Traffic needs push access. This is
   not documented anywhere obvious.
+- **`public_repo` is not `repo`.** They are nested in GitHub's token UI and trivially
+  confused, and picking the narrow one does not produce an error — the API answers every
+  request cheerfully, just about a smaller world. A run that quietly collects 78 of your
+  103 repos and reports success is worse than one that crashes, because the missing
+  repos' series files are left untouched and simply stop updating behind a dashboard that
+  still looks plausible. `collect.py` compares each run against the previous index and
+  **refuses to write a materially smaller one**; losing the private repos entirely is
+  called out by name. `--allow-shrink` overrides it when repos really were deleted.
 - **`/orgs/{owner}` returns 404 for a personal account** and always will. `collect.py`
   tries the authenticated-user endpoint first for exactly this reason, then the org
   endpoint, then the public one — and prints which it used, because the public fallback

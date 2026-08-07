@@ -46,6 +46,12 @@ python3 collect.py --only some-repo                 # one repo, for quick API ch
 - **A read-only token 403s on every traffic endpoint.** Traffic needs push access. A 403
   with `X-RateLimit-Remaining` still healthy is a permissions answer, not a rate limit,
   and retrying cannot fix it — `get()` distinguishes these and must keep doing so.
+- **A `public_repo` token collects a smaller fleet without erroring.** This is why
+  `shrink_problem()` exists and why the index write is gated on it. Do not weaken that
+  guard into a warning: the failure it catches is silent, green, and leaves a plausible
+  dashboard of the wrong fleet. Note the series files for the repos that *were* seen are
+  written before the guard runs — the guard protects `index.json`, which is what the
+  renderer reads.
 - **`Retry-After` is checked before `X-RateLimit-Reset`.** The secondary (burst) limit
   reports a healthy remaining budget while refusing the request. Check it first or a
   burst-limited call looks like a permissions failure and gets silently dropped from the

@@ -387,6 +387,39 @@ def write(path, obj):
 # Main
 # --------------------------------------------------------------------------
 
+def shrink_problem(prev_repos, now_repos):
+    """Is this collection materially smaller than the last one? -> (problem, missing).
+
+    A scheduled run once went GREEN having collected 78 repos instead of 103, silently
+    dropping every private one, because the token carried `public_repo` rather than the
+    full `repo` scope. Nothing errored: the API answered every request cheerfully, just
+    about a smaller world. A run that quietly loses a quarter of the fleet and reports
+    success is worse than one that crashes — the per-repo series files are left
+    untouched and simply stop updating, so the data goes stale invisibly behind a
+    plausible-looking dashboard of the wrong fleet.
+
+    Repos do occasionally get deleted, so a small shrink is a warning rather than an
+    error. Losing the private repos ENTIRELY is never legitimate, and is named
+    explicitly because the cause is always the same one.
+    """
+    prev_n, now_n = len(prev_repos), len(now_repos)
+    prev_priv = sum(1 for r in prev_repos if r.get("private"))
+    now_priv = sum(1 for r in now_repos if r.get("private"))
+    missing = {r["name"] for r in prev_repos} - {r["name"] for r in now_repos}
+
+    if prev_priv > 0 and now_priv == 0:
+        return (
+            f"saw {prev_priv} private repos last time and none now. The token cannot\n"
+            f"see private repositories — a classic PAT needs the full `repo` scope, not\n"
+            f"`public_repo` (they are nested in GitHub's UI and easy to confuse).",
+            missing,
+        )
+    if now_n < prev_n * 0.9:
+        return (f"collected {now_n} repos, down from {prev_n} — more than a 10% drop.",
+                missing)
+    return None, missing
+
+
 def main():
     global TOKEN
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
@@ -394,6 +427,8 @@ def main():
     ap.add_argument("--check", action="store_true", help="fetch and report, write nothing")
     ap.add_argument("--commit", action="store_true", help="commit and push the result")
     ap.add_argument("--only", help="restrict to one repo name")
+    ap.add_argument("--allow-shrink", action="store_true",
+                    help="write the index even if it lost repos since last time")
     args = ap.parse_args()
 
     cfg_path = Path(args.config).resolve()
@@ -454,6 +489,28 @@ def main():
         print(f"[{i:>3}/{len(repos)}] {name:<34} {flag} "
               f"+{added:>2}d ~{revised:>2}d  {len(series['traffic']):>4}d total"
               + (f"   ({note})" if note else ""))
+
+    # Refuse to write a materially smaller index than last time. See shrink_problem():
+    # a run that silently loses a quarter of the fleet and reports success leaves every
+    # series file untouched, so the data goes stale invisibly behind a dashboard that
+    # looks perfectly plausible — a far worse outcome than a crash.
+    prev_path = data_dir / "index.json"
+    if prev_path.exists() and not args.only:
+        prev = json.loads(prev_path.read_text(encoding="utf-8"))
+        problem, missing = shrink_problem(prev.get("repos", []), index["repos"])
+        if problem and not args.allow_shrink:
+            print(f"\nREFUSING TO WRITE: {problem}", file=sys.stderr)
+            if missing:
+                sample = ", ".join(sorted(missing)[:8])
+                print(f"Missing: {sample}"
+                      + (f" (+{len(missing)-8} more)" if len(missing) > 8 else ""),
+                      file=sys.stderr)
+            print("\nThe existing per-repo series files are untouched and no data has been\n"
+                  "lost. Fix the token and re-run. If this shrink is genuine (repos really\n"
+                  "were deleted), re-run with --allow-shrink.", file=sys.stderr)
+            sys.exit(1)
+        if problem:
+            print(f"\nWARNING: {problem} (proceeding, --allow-shrink given)")
 
     if not args.check:
         write(data_dir / "index.json", index)
