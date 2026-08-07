@@ -1,0 +1,41 @@
+{
+  "_comment": "Copy to config.json and edit. Keys starting with _ are ignored, so you can annotate your own copy. Every path is relative to THIS FILE, not to the working directory, so the same commands work from anywhere.",
+
+  "_owner": "The GitHub user or organisation to collect. The token must be able to see it: traffic endpoints need PUSH access, so this is normally your own account or an org you administer.",
+  "owner": "your-github-username",
+
+  "_data": "Where the per-repo JSON series and index.json are written. Keep this in git — it IS the history, and nothing can rebuild it.",
+  "data": "data",
+
+  "_include_private": "Private repos appear in the portal (which is password-gated) but never in the public summary. Set false if you would rather not have their names on disk at all.",
+  "include_private": true,
+
+  "include_forks": false,
+
+  "_exclude": "Repo names to skip entirely, case-insensitive.",
+  "exclude": [],
+
+  "_trail_days": "How long to keep the rolling referrer/path/release trails. Traffic and snapshot series are never pruned.",
+  "trail_days": 400,
+
+  "portal": {
+    "_comment": "The private, everything-included page. Rendered to a single self-contained HTML file with no CDN, no fonts and no fetch, so it also opens straight from disk.",
+    "out": "portal/page.html",
+    "title": "Fleet analytics",
+    "_subtitle": "{owner} is substituted.",
+    "subtitle": "Every repo under {owner}, public and private.",
+    "_window_days": "How much history the fleet-wide charts cover.",
+    "window_days": 90
+  },
+
+  "public_summary": {
+    "_comment": "Optional. A JSON file of PUBLIC repos and only figures already visible on the repo page — stars, forks, downloads, releases. Deliberately no traffic: views and clones say how many people looked and did not stay, which is nobody else's business and invites gaming once published. Point this at your site's data directory, or set out to null to skip it.",
+    "out": null
+  },
+
+  "theme": {
+    "_comment": "Optional. Overrides the default palette; anything you leave out keeps its default. If you change `views` or `clones`, check the new pair against BOTH your light and dark surface — a palette that only reads on one is the usual way a themed chart becomes unreadable.",
+    "light": {},
+    "dark": {}
+  }
+}

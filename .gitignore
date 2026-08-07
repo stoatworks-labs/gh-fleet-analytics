@@ -1,0 +1,13 @@
+# Your own copies. The examples are tracked; these are not.
+config.json
+portal/wrangler.jsonc
+portal/page.html
+
+# Your collected data lives in YOUR repo, not in a clone of this one.
+/data/
+
+node_modules/
+.wrangler/
+__pycache__/
+*.pyc
+.DS_Store

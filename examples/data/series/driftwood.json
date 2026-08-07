@@ -1,0 +1,937 @@
+{
+ "repo": "driftwood",
+ "traffic": {
+  "2026-06-23": {
+   "views": 12,
+   "view_uniques": 6,
+   "clones": 33,
+   "clone_uniques": 9
+  },
+  "2026-06-24": {
+   "views": 12,
+   "view_uniques": 8,
+   "clones": 31,
+   "clone_uniques": 9
+  },
+  "2026-06-25": {
+   "views": 7,
+   "view_uniques": 3,
+   "clones": 54,
+   "clone_uniques": 24
+  },
+  "2026-06-26": {
+   "views": 9,
+   "view_uniques": 6,
+   "clones": 28,
+   "clone_uniques": 13
+  },
+  "2026-06-27": {
+   "views": 6,
+   "view_uniques": 3,
+   "clones": 44,
+   "clone_uniques": 12
+  },
+  "2026-06-28": {
+   "views": 5,
+   "view_uniques": 2,
+   "clones": 64,
+   "clone_uniques": 27
+  },
+  "2026-06-29": {
+   "views": 13,
+   "view_uniques": 8,
+   "clones": 64,
+   "clone_uniques": 20
+  },
+  "2026-06-30": {
+   "views": 7,
+   "view_uniques": 5,
+   "clones": 81,
+   "clone_uniques": 31
+  },
+  "2026-07-01": {
+   "views": 6,
+   "view_uniques": 2,
+   "clones": 46,
+   "clone_uniques": 12
+  },
+  "2026-07-02": {
+   "views": 11,
+   "view_uniques": 8,
+   "clones": 59,
+   "clone_uniques": 29
+  },
+  "2026-07-03": {
+   "views": 8,
+   "view_uniques": 4,
+   "clones": 34,
+   "clone_uniques": 16
+  },
+  "2026-07-04": {
+   "views": 7,
+   "view_uniques": 4,
+   "clones": 65,
+   "clone_uniques": 29
+  },
+  "2026-07-05": {
+   "views": 7,
+   "view_uniques": 3,
+   "clones": 45,
+   "clone_uniques": 9
+  },
+  "2026-07-06": {
+   "views": 6,
+   "view_uniques": 3,
+   "clones": 59,
+   "clone_uniques": 26
+  },
+  "2026-07-07": {
+   "views": 14,
+   "view_uniques": 7,
+   "clones": 59,
+   "clone_uniques": 20
+  },
+  "2026-07-08": {
+   "views": 8,
+   "view_uniques": 4,
+   "clones": 38,
+   "clone_uniques": 10
+  },
+  "2026-07-09": {
+   "views": 8,
+   "view_uniques": 5,
+   "clones": 39,
+   "clone_uniques": 12
+  },
+  "2026-07-10": {
+   "views": 13,
+   "view_uniques": 10,
+   "clones": 69,
+   "clone_uniques": 19
+  },
+  "2026-07-11": {
+   "views": 7,
+   "view_uniques": 3,
+   "clones": 49,
+   "clone_uniques": 14
+  },
+  "2026-07-12": {
+   "views": 7,
+   "view_uniques": 4,
+   "clones": 48,
+   "clone_uniques": 15
+  },
+  "2026-07-13": {
+   "views": 13,
+   "view_uniques": 7,
+   "clones": 41,
+   "clone_uniques": 19
+  },
+  "2026-07-14": {
+   "views": 11,
+   "view_uniques": 6,
+   "clones": 84,
+   "clone_uniques": 25
+  },
+  "2026-07-15": {
+   "views": 16,
+   "view_uniques": 11,
+   "clones": 94,
+   "clone_uniques": 32
+  },
+  "2026-07-16": {
+   "views": 13,
+   "view_uniques": 8,
+   "clones": 90,
+   "clone_uniques": 24
+  },
+  "2026-07-17": {
+   "views": 15,
+   "view_uniques": 9,
+   "clones": 85,
+   "clone_uniques": 19
+  },
+  "2026-07-18": {
+   "views": 8,
+   "view_uniques": 4,
+   "clones": 91,
+   "clone_uniques": 18
+  },
+  "2026-07-19": {
+   "views": 4,
+   "view_uniques": 1,
+   "clones": 36,
+   "clone_uniques": 9
+  },
+  "2026-07-20": {
+   "views": 12,
+   "view_uniques": 8,
+   "clones": 69,
+   "clone_uniques": 33
+  },
+  "2026-07-21": {
+   "views": 8,
+   "view_uniques": 6,
+   "clones": 99,
+   "clone_uniques": 36
+  },
+  "2026-07-22": {
+   "views": 16,
+   "view_uniques": 9,
+   "clones": 37,
+   "clone_uniques": 17
+  },
+  "2026-07-23": {
+   "views": 13,
+   "view_uniques": 8,
+   "clones": 84,
+   "clone_uniques": 34
+  },
+  "2026-07-24": {
+   "views": 9,
+   "view_uniques": 6,
+   "clones": 63,
+   "clone_uniques": 18
+  },
+  "2026-07-25": {
+   "views": 7,
+   "view_uniques": 4,
+   "clones": 38,
+   "clone_uniques": 18
+  },
+  "2026-07-26": {
+   "views": 6,
+   "view_uniques": 3,
+   "clones": 69,
+   "clone_uniques": 14
+  },
+  "2026-07-27": {
+   "views": 13,
+   "view_uniques": 8,
+   "clones": 72,
+   "clone_uniques": 28
+  },
+  "2026-07-28": {
+   "views": 15,
+   "view_uniques": 11,
+   "clones": 72,
+   "clone_uniques": 25
+  },
+  "2026-07-29": {
+   "views": 8,
+   "view_uniques": 5,
+   "clones": 60,
+   "clone_uniques": 20
+  },
+  "2026-07-30": {
+   "views": 18,
+   "view_uniques": 11,
+   "clones": 39,
+   "clone_uniques": 13
+  },
+  "2026-07-31": {
+   "views": 13,
+   "view_uniques": 6,
+   "clones": 90,
+   "clone_uniques": 35
+  },
+  "2026-08-01": {
+   "views": 4,
+   "view_uniques": 2,
+   "clones": 45,
+   "clone_uniques": 22
+  },
+  "2026-08-02": {
+   "views": 7,
+   "view_uniques": 5,
+   "clones": 49,
+   "clone_uniques": 12
+  },
+  "2026-08-03": {
+   "views": 12,
+   "view_uniques": 7,
+   "clones": 91,
+   "clone_uniques": 41
+  },
+  "2026-08-04": {
+   "views": 9,
+   "view_uniques": 5,
+   "clones": 93,
+   "clone_uniques": 40
+  },
+  "2026-08-05": {
+   "views": 10,
+   "view_uniques": 6,
+   "clones": 81,
+   "clone_uniques": 35
+  },
+  "2026-08-06": {
+   "views": 17,
+   "view_uniques": 11,
+   "clones": 113,
+   "clone_uniques": 52
+  }
+ },
+ "snapshots": {
+  "2026-06-23": {
+   "stars": 46,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 4,
+   "size_kb": 11144,
+   "downloads": 3,
+   "releases": 2,
+   "issues_open": 6,
+   "issues_closed": 45,
+   "prs_open": 2,
+   "prs_merged": 18
+  },
+  "2026-06-24": {
+   "stars": 39,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 4,
+   "size_kb": 10540,
+   "downloads": 4,
+   "releases": 2,
+   "issues_open": 7,
+   "issues_closed": 34,
+   "prs_open": 2,
+   "prs_merged": 14
+  },
+  "2026-06-25": {
+   "stars": 37,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 5,
+   "size_kb": 8374,
+   "downloads": 8,
+   "releases": 2,
+   "issues_open": 2,
+   "issues_closed": 55,
+   "prs_open": 3,
+   "prs_merged": 22
+  },
+  "2026-06-26": {
+   "stars": 47,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 6,
+   "size_kb": 16506,
+   "downloads": 17,
+   "releases": 2,
+   "issues_open": 5,
+   "issues_closed": 2,
+   "prs_open": 0,
+   "prs_merged": 32
+  },
+  "2026-06-27": {
+   "stars": 44,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 5,
+   "size_kb": 3328,
+   "downloads": 30,
+   "releases": 2,
+   "issues_open": 4,
+   "issues_closed": 22,
+   "prs_open": 0,
+   "prs_merged": 8
+  },
+  "2026-06-28": {
+   "stars": 41,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 3,
+   "size_kb": 16151,
+   "downloads": 36,
+   "releases": 2,
+   "issues_open": 6,
+   "issues_closed": 27,
+   "prs_open": 1,
+   "prs_merged": 26
+  },
+  "2026-06-29": {
+   "stars": 50,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 3,
+   "size_kb": 7866,
+   "downloads": 38,
+   "releases": 2,
+   "issues_open": 1,
+   "issues_closed": 29,
+   "prs_open": 2,
+   "prs_merged": 31
+  },
+  "2026-06-30": {
+   "stars": 52,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 5,
+   "size_kb": 20472,
+   "downloads": 49,
+   "releases": 2,
+   "issues_open": 0,
+   "issues_closed": 36,
+   "prs_open": 3,
+   "prs_merged": 23
+  },
+  "2026-07-01": {
+   "stars": 40,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 7,
+   "size_kb": 3429,
+   "downloads": 53,
+   "releases": 2,
+   "issues_open": 7,
+   "issues_closed": 44,
+   "prs_open": 2,
+   "prs_merged": 7
+  },
+  "2026-07-02": {
+   "stars": 43,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 0,
+   "size_kb": 8739,
+   "downloads": 62,
+   "releases": 2,
+   "issues_open": 1,
+   "issues_closed": 52,
+   "prs_open": 0,
+   "prs_merged": 14
+  },
+  "2026-07-03": {
+   "stars": 43,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 3,
+   "size_kb": 16150,
+   "downloads": 67,
+   "releases": 2,
+   "issues_open": 4,
+   "issues_closed": 7,
+   "prs_open": 0,
+   "prs_merged": 13
+  },
+  "2026-07-04": {
+   "stars": 47,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 2,
+   "size_kb": 17378,
+   "downloads": 84,
+   "releases": 2,
+   "issues_open": 6,
+   "issues_closed": 34,
+   "prs_open": 1,
+   "prs_merged": 0
+  },
+  "2026-07-05": {
+   "stars": 50,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 4,
+   "size_kb": 22795,
+   "downloads": 92,
+   "releases": 2,
+   "issues_open": 7,
+   "issues_closed": 51,
+   "prs_open": 1,
+   "prs_merged": 29
+  },
+  "2026-07-06": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 1,
+   "size_kb": 4766,
+   "downloads": 108,
+   "releases": 2,
+   "issues_open": 1,
+   "issues_closed": 40,
+   "prs_open": 3,
+   "prs_merged": 36
+  },
+  "2026-07-07": {
+   "stars": 44,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 6,
+   "size_kb": 20874,
+   "downloads": 116,
+   "releases": 2,
+   "issues_open": 7,
+   "issues_closed": 53,
+   "prs_open": 1,
+   "prs_merged": 28
+  },
+  "2026-07-08": {
+   "stars": 50,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 7,
+   "size_kb": 5922,
+   "downloads": 133,
+   "releases": 2,
+   "issues_open": 6,
+   "issues_closed": 3,
+   "prs_open": 3,
+   "prs_merged": 39
+  },
+  "2026-07-09": {
+   "stars": 51,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 5,
+   "size_kb": 20444,
+   "downloads": 133,
+   "releases": 2,
+   "issues_open": 5,
+   "issues_closed": 16,
+   "prs_open": 3,
+   "prs_merged": 27
+  },
+  "2026-07-10": {
+   "stars": 49,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 3,
+   "size_kb": 8236,
+   "downloads": 145,
+   "releases": 2,
+   "issues_open": 3,
+   "issues_closed": 17,
+   "prs_open": 0,
+   "prs_merged": 21
+  },
+  "2026-07-11": {
+   "stars": 42,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 3,
+   "size_kb": 3471,
+   "downloads": 150,
+   "releases": 2,
+   "issues_open": 5,
+   "issues_closed": 22,
+   "prs_open": 2,
+   "prs_merged": 25
+  },
+  "2026-07-12": {
+   "stars": 42,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 1,
+   "size_kb": 8578,
+   "downloads": 156,
+   "releases": 2,
+   "issues_open": 3,
+   "issues_closed": 48,
+   "prs_open": 0,
+   "prs_merged": 6
+  },
+  "2026-07-13": {
+   "stars": 53,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 1,
+   "size_kb": 5617,
+   "downloads": 167,
+   "releases": 2,
+   "issues_open": 7,
+   "issues_closed": 16,
+   "prs_open": 3,
+   "prs_merged": 36
+  },
+  "2026-07-14": {
+   "stars": 44,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 0,
+   "size_kb": 12719,
+   "downloads": 174,
+   "releases": 2,
+   "issues_open": 7,
+   "issues_closed": 60,
+   "prs_open": 3,
+   "prs_merged": 27
+  },
+  "2026-07-15": {
+   "stars": 51,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 0,
+   "size_kb": 15885,
+   "downloads": 176,
+   "releases": 2,
+   "issues_open": 4,
+   "issues_closed": 53,
+   "prs_open": 1,
+   "prs_merged": 31
+  },
+  "2026-07-16": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 1,
+   "size_kb": 21971,
+   "downloads": 187,
+   "releases": 2,
+   "issues_open": 1,
+   "issues_closed": 33,
+   "prs_open": 1,
+   "prs_merged": 11
+  },
+  "2026-07-17": {
+   "stars": 53,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 7,
+   "size_kb": 1819,
+   "downloads": 197,
+   "releases": 2,
+   "issues_open": 5,
+   "issues_closed": 44,
+   "prs_open": 2,
+   "prs_merged": 7
+  },
+  "2026-07-18": {
+   "stars": 48,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 7,
+   "size_kb": 5171,
+   "downloads": 202,
+   "releases": 2,
+   "issues_open": 6,
+   "issues_closed": 10,
+   "prs_open": 1,
+   "prs_merged": 38
+  },
+  "2026-07-19": {
+   "stars": 49,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 4,
+   "size_kb": 10474,
+   "downloads": 209,
+   "releases": 2,
+   "issues_open": 5,
+   "issues_closed": 60,
+   "prs_open": 0,
+   "prs_merged": 15
+  },
+  "2026-07-20": {
+   "stars": 47,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 4,
+   "size_kb": 16913,
+   "downloads": 222,
+   "releases": 2,
+   "issues_open": 0,
+   "issues_closed": 20,
+   "prs_open": 1,
+   "prs_merged": 25
+  },
+  "2026-07-21": {
+   "stars": 47,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 7,
+   "size_kb": 23747,
+   "downloads": 236,
+   "releases": 2,
+   "issues_open": 7,
+   "issues_closed": 7,
+   "prs_open": 1,
+   "prs_merged": 11
+  },
+  "2026-07-22": {
+   "stars": 51,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 6,
+   "size_kb": 17474,
+   "downloads": 247,
+   "releases": 2,
+   "issues_open": 6,
+   "issues_closed": 52,
+   "prs_open": 1,
+   "prs_merged": 20
+  },
+  "2026-07-23": {
+   "stars": 49,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 2,
+   "size_kb": 13838,
+   "downloads": 258,
+   "releases": 2,
+   "issues_open": 6,
+   "issues_closed": 45,
+   "prs_open": 2,
+   "prs_merged": 38
+  },
+  "2026-07-24": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 5,
+   "size_kb": 3747,
+   "downloads": 265,
+   "releases": 2,
+   "issues_open": 4,
+   "issues_closed": 24,
+   "prs_open": 1,
+   "prs_merged": 35
+  },
+  "2026-07-25": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 4,
+   "size_kb": 8966,
+   "downloads": 278,
+   "releases": 2,
+   "issues_open": 1,
+   "issues_closed": 14,
+   "prs_open": 2,
+   "prs_merged": 27
+  },
+  "2026-07-26": {
+   "stars": 51,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 6,
+   "size_kb": 23740,
+   "downloads": 279,
+   "releases": 2,
+   "issues_open": 5,
+   "issues_closed": 37,
+   "prs_open": 0,
+   "prs_merged": 31
+  },
+  "2026-07-27": {
+   "stars": 51,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 5,
+   "size_kb": 13825,
+   "downloads": 291,
+   "releases": 2,
+   "issues_open": 6,
+   "issues_closed": 42,
+   "prs_open": 3,
+   "prs_merged": 28
+  },
+  "2026-07-28": {
+   "stars": 53,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 2,
+   "size_kb": 6236,
+   "downloads": 297,
+   "releases": 2,
+   "issues_open": 4,
+   "issues_closed": 54,
+   "prs_open": 0,
+   "prs_merged": 25
+  },
+  "2026-07-29": {
+   "stars": 53,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 7,
+   "size_kb": 22079,
+   "downloads": 301,
+   "releases": 2,
+   "issues_open": 3,
+   "issues_closed": 14,
+   "prs_open": 0,
+   "prs_merged": 20
+  },
+  "2026-07-30": {
+   "stars": 52,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 6,
+   "size_kb": 9920,
+   "downloads": 310,
+   "releases": 2,
+   "issues_open": 5,
+   "issues_closed": 39,
+   "prs_open": 1,
+   "prs_merged": 30
+  },
+  "2026-07-31": {
+   "stars": 52,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 0,
+   "size_kb": 22263,
+   "downloads": 311,
+   "releases": 2,
+   "issues_open": 0,
+   "issues_closed": 39,
+   "prs_open": 1,
+   "prs_merged": 20
+  },
+  "2026-08-01": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 1,
+   "size_kb": 7240,
+   "downloads": 313,
+   "releases": 2,
+   "issues_open": 3,
+   "issues_closed": 37,
+   "prs_open": 3,
+   "prs_merged": 8
+  },
+  "2026-08-02": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 3,
+   "size_kb": 16643,
+   "downloads": 327,
+   "releases": 2,
+   "issues_open": 7,
+   "issues_closed": 51,
+   "prs_open": 0,
+   "prs_merged": 39
+  },
+  "2026-08-03": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 3,
+   "size_kb": 23190,
+   "downloads": 334,
+   "releases": 2,
+   "issues_open": 5,
+   "issues_closed": 8,
+   "prs_open": 3,
+   "prs_merged": 14
+  },
+  "2026-08-04": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 7,
+   "size_kb": 18898,
+   "downloads": 344,
+   "releases": 2,
+   "issues_open": 2,
+   "issues_closed": 13,
+   "prs_open": 1,
+   "prs_merged": 14
+  },
+  "2026-08-05": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 1,
+   "size_kb": 8562,
+   "downloads": 349,
+   "releases": 2,
+   "issues_open": 0,
+   "issues_closed": 45,
+   "prs_open": 1,
+   "prs_merged": 40
+  },
+  "2026-08-06": {
+   "stars": 54,
+   "forks": 6,
+   "watchers": 3,
+   "open_issues": 2,
+   "size_kb": 16510,
+   "downloads": 358,
+   "releases": 2,
+   "issues_open": 1,
+   "issues_closed": 43,
+   "prs_open": 2,
+   "prs_merged": 16
+  }
+ },
+ "referrers": {
+  "2026-08-06": [
+   {
+    "source": "duckduckgo.com",
+    "count": 65,
+    "uniques": 3
+   },
+   {
+    "source": "reddit.com",
+    "count": 41,
+    "uniques": 57
+   },
+   {
+    "source": "lobste.rs",
+    "count": 112,
+    "uniques": 45
+   },
+   {
+    "source": "github.com",
+    "count": 92,
+    "uniques": 43
+   },
+   {
+    "source": "news.ycombinator.com",
+    "count": 235,
+    "uniques": 26
+   }
+  ]
+ },
+ "paths": {
+  "2026-08-06": [
+   {
+    "path": "/driftwood",
+    "count": 49,
+    "uniques": 82
+   },
+   {
+    "path": "/driftwood/releases",
+    "count": 143,
+    "uniques": 4
+   },
+   {
+    "path": "/driftwood/blob/main/README.md",
+    "count": 141,
+    "uniques": 47
+   },
+   {
+    "path": "/driftwood/issues",
+    "count": 101,
+    "uniques": 8
+   }
+  ]
+ },
+ "releases": {
+  "2026-08-06": {
+   "v0.2.0": {
+    "driftwood-v0.2.0.zip": 358
+   }
+  }
+ },
+ "meta": {
+  "name": "driftwood",
+  "private": false,
+  "archived": false,
+  "description": "An entirely fictional project called driftwood.",
+  "language": "Python",
+  "license": "MIT",
+  "topics": [],
+  "created_at": "2025-11-02T09:00:00Z",
+  "pushed_at": "2026-08-06T08:12:00Z",
+  "homepage": null,
+  "default_branch": "main",
+  "latest_release": "v0.2.0",
+  "latest_release_at": "2026-07-30T12:00:00Z"
+ }
+}

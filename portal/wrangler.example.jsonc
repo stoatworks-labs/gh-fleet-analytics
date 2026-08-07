@@ -1,0 +1,30 @@
+{
+  // Copy to wrangler.jsonc and edit. The copy is gitignored, because the route is the
+  // one piece of this that is specific to you.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fleet-analytics",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-30",
+
+  "workers_dev": true,
+
+  // Optional. Delete this block to stay on the workers.dev subdomain; a custom domain
+  // is attached straight from here with no dashboard step, provided the zone is on the
+  // same Cloudflare account.
+  "routes": [
+    { "pattern": "analytics.example.com", "custom_domain": true }
+  ],
+
+  // The rendered portal is imported as a string and bundled into the script, so the
+  // Worker has no origin to fetch from and nothing to leave unsecured. Re-run
+  // ./render.py and redeploy to update it.
+  "rules": [
+    { "type": "Text", "globs": ["page.html"], "fallthrough": true }
+  ],
+
+  "observability": { "enabled": true }
+
+  // Secret, set with `npx wrangler secret put PORTAL_PASSWORD`:
+  //   PORTAL_PASSWORD  the Basic-auth password. Any username is accepted at the prompt.
+  //                    Until it is set the Worker serves 503 rather than the data.
+}

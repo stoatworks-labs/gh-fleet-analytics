@@ -1,0 +1,98 @@
+# Daily analytics snapshot. Copy this into YOUR repo as .github/workflows/collect.yml.
+#
+# This workflow is the whole reason the data exists. GitHub keeps traffic views and
+# clones for FOURTEEN DAYS and reports stars, forks and download counts only as a
+# current total — so a day this job does not run is a day permanently missing from the
+# record, and no later run can recover it. Treat a red run here as data loss, not as a
+# flaky build.
+#
+# On a private repo this consumes Actions minutes: roughly 4 minutes a day per hundred
+# repos against the 2000/month allowance, most of it spent pacing the search API rather
+# than working. That is cheaper than a Cloudflare cron Worker, which would hit the
+# 50-subrequest-per-invocation limit long before it finished a hundred repos.
+
+name: analytics
+
+on:
+  schedule:
+    # 04:10 UTC. Deliberately not on the hour: GitHub delays scheduled runs on the hour
+    # under load, and the traffic endpoints return 202 "still computing" if asked while
+    # the day's aggregation is in flight.
+    - cron: "10 4 * * *"
+  workflow_dispatch:
+
+# One at a time. Two overlapping runs would both read the series files, both merge, and
+# the second push would lose the first one's work.
+concurrency:
+  group: analytics
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Collect
+        env:
+          # NOT secrets.GITHUB_TOKEN — that one is scoped to this repository alone and
+          # returns 404 for every other repo you own, which looks exactly like a
+          # deleted repo rather than a permissions problem.
+          #
+          # ANALYTICS_TOKEN must be able to read traffic across all your repos:
+          #   classic PAT      → `repo` scope
+          #   fine-grained PAT → Administration: read + Metadata: read, all repositories
+          # Traffic endpoints require PUSH access; a read-only token 403s on every one.
+          GITHUB_TOKEN: ${{ secrets.ANALYTICS_TOKEN }}
+        run: python3 collect.py --config config.json
+
+      - name: Commit the snapshot
+        run: |
+          set -euo pipefail
+          git config user.name  "analytics"
+          git config user.email "analytics@users.noreply.github.com"
+          git add data
+          # No changes is a legitimate outcome only if nothing moved at all, which is
+          # vanishingly rare once a snapshot date is part of every file. Exit cleanly
+          # either way rather than failing the run.
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+            exit 0
+          fi
+          git commit -m "analytics: snapshot $(date -u +%F)"
+
+          # Rebase and retry before giving up. Collection takes about fifteen minutes
+          # for a hundred repos, and anything pushed to the default branch during that
+          # window makes this checkout stale — `git push` then fails with "fetch first"
+          # and the whole run's data is thrown away.
+          #
+          # Rebase is safe here: only this job writes the data directory, so replaying
+          # one data commit onto whatever else landed cannot conflict in the normal
+          # case. A genuine conflict means someone ran the collector by hand and
+          # pushed, and that SHOULD fail loudly rather than be resolved silently.
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "push rejected, rebasing (attempt $attempt)"
+            git fetch origin "${GITHUB_REF_NAME}"
+            if ! git rebase "origin/${GITHUB_REF_NAME}"; then
+              git rebase --abort || true
+              echo "::error::Rebase conflicted in the data directory — a hand-run collection"
+              echo "::error::was probably pushed while this job was collecting. Today's snapshot"
+              echo "::error::was NOT saved. Re-run this workflow; the data is not recoverable"
+              echo "::error::from a later run, because GitHub only keeps 14 days of traffic."
+              exit 1
+            fi
+          done
+          echo "::error::Still could not push after 3 rebase attempts. Today's snapshot was NOT saved."
+          exit 1

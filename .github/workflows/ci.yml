@@ -1,0 +1,56 @@
+# Renders the bundled synthetic dataset. This proves the renderer works end to end and
+# that the example data still matches the shape the collector writes.
+#
+# It does NOT touch the GitHub API — the collector's fetch and merge paths are exercised
+# only by running it for real against an account.
+
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Byte-compile
+        run: python3 -m compileall -q collect.py render.py examples/make-example-data.py
+
+      - name: Example data is deterministic
+        # The generator is seeded and dated, so regenerating must produce no diff. A diff
+        # here means the generator changed but the committed data did not, or vice versa.
+        run: |
+          python3 examples/make-example-data.py
+          git diff --exit-code -- examples/data \
+            || { echo "::error::examples/data is stale — re-run examples/make-example-data.py and commit"; exit 1; }
+
+      - name: Render the portal
+        run: python3 render.py --config examples/config.json
+
+      - name: The page is non-trivial and self-contained
+        # No CDN, no fonts, no fetch: the page must work from a file:// URL with no
+        # network. A stray external reference would break that silently in a browser
+        # that happens to be online.
+        run: |
+          set -euo pipefail
+          test -s portal/page.html
+          bytes=$(wc -c < portal/page.html)
+          test "$bytes" -gt 5000 || { echo "::error::page.html is only $bytes bytes"; exit 1; }
+          if grep -Eq '(src|href)="https?://' portal/page.html; then
+            echo "::error::page.html references an external resource; it must be self-contained"
+            grep -En '(src|href)="https?://' portal/page.html
+            exit 1
+          fi
+          echo "page.html: $bytes bytes, no external references"
