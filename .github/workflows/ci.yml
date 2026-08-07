@@ -29,12 +29,17 @@ jobs:
         run: python3 -m compileall -q collect.py render.py examples/make-example-data.py
 
       - name: The example workflow is valid YAML
-        # Users copy this file into their own repo verbatim. A syntax error in it would
-        # never fail anything here, and would surface as a broken workflow in a stranger's
-        # repository instead.
+        # Users copy this file into their own repo verbatim. It lives in examples/ rather
+        # than .github/workflows/, so Actions never parses it — a syntax error would fail
+        # nothing here and surface as a broken workflow in a stranger's repository.
+        #
+        # PyYAML is a CI-only dev dependency and is NOT on the runner by default. The
+        # tool itself remains standard-library-only; that claim is about collect.py and
+        # render.py, not about this check.
         run: |
+          python3 -m pip install --quiet pyyaml
           python3 -c "
-          import yaml, sys
+          import yaml
           d = yaml.safe_load(open('examples/collect.yml'))
           steps = d['jobs']['collect']['steps']
           assert steps, 'no steps'
