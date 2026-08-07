@@ -1,7 +1,9 @@
 # Your own copies. The examples are tracked; these are not.
-config.json
-portal/wrangler.jsonc
-portal/page.html
+# Anchored with a leading slash on purpose — an unanchored `config.json` also matches
+# examples/config.json, which CI needs.
+/config.json
+/portal/wrangler.jsonc
+/portal/page.html
 
 # Your collected data lives in YOUR repo, not in a clone of this one.
 /data/

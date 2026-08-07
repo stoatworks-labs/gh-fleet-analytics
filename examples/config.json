@@ -1,0 +1,13 @@
+{
+  "_comment": "Config for the synthetic dataset. `./render.py --config examples/config.json` renders a real portal page from made-up numbers, before you have collected anything. CI runs exactly this on every push, so a change that breaks the renderer fails there rather than on your data.",
+  "owner": "example-org",
+  "data": "data",
+  "portal": {
+    "out": "../portal/page.html",
+    "title": "Fleet analytics — example data",
+    "subtitle": "Synthetic data for {owner}. Nothing here is real."
+  },
+  "public_summary": {
+    "out": null
+  }
+}
