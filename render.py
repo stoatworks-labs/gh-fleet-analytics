@@ -15,7 +15,8 @@ Two outputs from one dataset:
 
   public_summary.out (optional; null to skip)
       Public repos only, and only the figures that are already public knowledge on the
-      repo page anyway — stars, forks, release downloads, counts. Deliberately NOT
+      repo page anyway — stars, forks, release downloads, release counts, and open and
+      closed issue and PR counts. Deliberately NOT
       traffic: views and clones say how many people looked and did not stay, which is
       nobody else's business, and a public number invites gaming. Feed it to a static
       site generator to publish a "what we've shipped" page.
@@ -508,6 +509,10 @@ def render_public(index, series):
             "latest_release": r.get("latest_release"),
             "latest_release_at": r.get("latest_release_at"),
             "pushed_at": r.get("pushed_at"),
+            "issues_open": r.get("issues_open", 0),
+            "issues_closed": r.get("issues_closed", 0),
+            "prs_open": r.get("prs_open", 0),
+            "prs_merged": r.get("prs_merged", 0),
         })
     out.sort(key=lambda r: -r["stars"])
     return {
@@ -517,6 +522,10 @@ def render_public(index, series):
             "stars": sum(r["stars"] for r in out),
             "downloads": sum(r["downloads"] for r in out),
             "releases": sum(r["releases"] for r in out),
+            "issues_open": sum(r["issues_open"] for r in out),
+            "issues_closed": sum(r["issues_closed"] for r in out),
+            "prs_open": sum(r["prs_open"] for r in out),
+            "prs_merged": sum(r["prs_merged"] for r in out),
         },
         "repos": out,
     }
