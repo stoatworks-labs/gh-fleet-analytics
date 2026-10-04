@@ -40,6 +40,7 @@ Two kinds of series live side by side in each file and they must not be confused
 """
 
 import argparse
+import http.client
 import json
 import os
 import subprocess
@@ -157,7 +158,13 @@ def get(path, retries=4):
                 time.sleep(2 ** attempt)
                 continue
             return e.code, None
-        except (urllib.error.URLError, TimeoutError):
+        # http.client errors are NOT URLErrors. A connection GitHub drops mid-response
+        # raises RemoteDisconnected (an HTTPException and a ConnectionError) straight
+        # through urlopen, and before this was caught one dropped socket ended a
+        # 55-minute run at repo 271 of 279 with nothing written: the index is only
+        # saved at the very end, so every repo already fetched was thrown away.
+        except (urllib.error.URLError, TimeoutError,
+                http.client.HTTPException, ConnectionError):
             if attempt < retries - 1:
                 time.sleep(2 ** attempt)
                 continue
