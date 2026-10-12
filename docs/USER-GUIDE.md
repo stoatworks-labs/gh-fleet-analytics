@@ -13,7 +13,7 @@ This writes the number down each day.
 
 ![The portal, rendered from the bundled synthetic dataset](screenshots/portal.png)
 
-> **Before you rely on this:** the collector and renderer run daily against a ~100-repo account, and
+> **Before you rely on this:** the collector and renderer run daily against a ~280-repo account, and
 > the outputs are the ones in use there. CI renders a bundled synthetic dataset on every push,
 > which **proves the renderer works but doesn't exercise the GitHub API.** The Worker is deployed
 > and serving, but the deploy path isn't covered by tests.
@@ -91,10 +91,10 @@ looked and didn't stay, which is nobody else's business, and **a public number i
 
 ## Cost
 
-Roughly **4 minutes of Actions time a day per hundred repos**, most of it spent **pacing rather
-than working**: the search API allows 30 requests a minute, so the loop sleeps between them on
-purpose. On a private repo that's about 120 minutes a month against the free allowance; on a
-public repo, nothing.
+Roughly **20 minutes of Actions time a day per hundred repos** (54 minutes for 284 repos on 12
+October 2026), most of it spent **pacing rather than working**: the search API allows 30 requests
+a minute, so the loop sleeps between them on purpose. On a private repo that's about 600 minutes a
+month per hundred repos against the free allowance; on a public repo, nothing.
 
 A scheduled edge Worker was the obvious alternative and **doesn't work**: the per-invocation
 subrequest limit is reached long before a hundred repos are done.

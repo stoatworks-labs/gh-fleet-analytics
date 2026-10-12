@@ -4,7 +4,7 @@
 
 > **AI-assisted project.** This codebase was created with [Claude](https://claude.com/claude-code)
 > (Anthropic), directed and reviewed by a human author. The collector and renderer run daily
-> against a ~100-repo account, and the outputs are the ones in use there. CI renders the
+> against a ~280-repo account, and the outputs are the ones in use there. CI renders the
 > bundled synthetic dataset on every push, which proves the renderer works but doesn't
 > exercise the GitHub API. The Cloudflare Worker is deployed and serving, but the deploy
 > path isn't covered by tests.
@@ -191,11 +191,12 @@ no diff unless the shape actually changed.
 
 ## Cost and rate limits
 
-Roughly **4 minutes of Actions time a day per hundred repos**, most of it spent pacing
-rather than working: the search API allows 30 requests a *minute* against the core budget's
-5,000 an hour, and four search calls run per repo, so the loop sleeps 2 seconds between
-them on purpose. On a private repo that's about 120 minutes a month against the
-2,000-minute free allowance. On a public repo, nothing.
+Roughly **20 minutes of Actions time a day per hundred repos** (the collect step took 54
+minutes for 284 repos on 12 October 2026), most of it spent pacing rather than working: the
+search API allows 30 requests a *minute* against the core budget's 5,000 an hour, and four
+search calls run per repo, so the loop sleeps 2 seconds between them on purpose. On a private
+repo that's about 600 minutes a month per hundred repos against the 2,000-minute free
+allowance. On a public repo, nothing.
 
 A Cloudflare cron Worker was the obvious alternative and doesn't work: the
 50-subrequest-per-invocation limit is reached long before a hundred repos are done.
