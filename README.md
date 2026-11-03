@@ -14,6 +14,8 @@ clones are kept for **fourteen days**. Stars, forks and release download counts 
 the API only ever reports the *current* total, so a star history doesn't exist unless
 something wrote the number down each day.
 
+The [project page](https://stoatworks-labs.com/software/gh-fleet-analytics/) has the [user guide](https://stoatworks-labs.com/software/gh-fleet-analytics/guide/).
+
 This writes the number down each day.
 
 ```
